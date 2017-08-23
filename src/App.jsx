@@ -24,6 +24,7 @@ class App extends Component {
 		this.addMessage = this.addMessage.bind(this);
 	}
 
+	//incoming message
 	addMessage(content) {
 		console.log(content);
 		let addMessage = {
