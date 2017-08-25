@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
-const uuid = require('uuid');
 
 class App extends Component {
 	constructor(props) {
@@ -37,7 +36,7 @@ class App extends Component {
 		let addMessage = {
 			username: this.state.currentUser,
 			content: content,
-			type: 'message'
+			type: 'postMessage'
 		};
 		console.log(addMessage);
 		this.socket.send(JSON.stringify(addMessage));
