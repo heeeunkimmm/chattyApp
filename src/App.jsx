@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx';
+import NavBar from './NavBar.jsx';
 import MessageList from './MessageList.jsx';
 
 
@@ -23,10 +24,21 @@ class App extends Component {
 		this.socket.addEventListener('message', (event) => {
 			const newMessages = this.state.messages;
 			const messageObject = JSON.parse(event.data);
-			newMessages.push(messageObject);
-			this.setState({
-				messages: newMessages
-			})
+			console.log("what is this: ", messageObject)
+			switch(messageObject.type) {
+				case "incomingMessage":
+					newMessages.push(messageObject);
+					this.setState({
+						messages: newMessages
+					})
+					break;
+				case "incomingNotification":
+					newMessages.push(messageObject);
+					this.setState({
+						messages: newMessages
+					})
+					break;
+			}
 		})
 	}
 
@@ -49,7 +61,7 @@ class App extends Component {
 		// console.log(user);
 		let addUser = {
 			username: user,
-			type: 'change-user',
+			type: 'postNotification',
 			content: this.state.currentUser + " changed their name to " + user
 		};
 		this.setState({
@@ -63,9 +75,7 @@ class App extends Component {
 		console.log("Rendering <App/>");
 		return (
 			<div>
-			<nav className="navbar">
-		    <a href="/" className="navbar-brand">Chatty</a>
-		  </nav>
+			<NavBar />
 		  <MessageList messages={ this.state.messages }/>
 		  <ChatBar
 		  	// currentUser= { this.state.currentUser }

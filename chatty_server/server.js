@@ -31,13 +31,27 @@ wss.on('connection', (socket) => {
   socket.on('message', function incoming(message) {
     console.log('received: ', message);
     const receivedMessage = JSON.parse(message);
-    console.log(receivedMessage);
-    const messageObject = {
-      id: uuid(),
-      username: receivedMessage.username,
-      content: receivedMessage.content
-    };
-    wss.broadcast(JSON.stringify(messageObject));
+    switch(receivedMessage.type) {
+      case "postMessage":
+        const messageObject = {
+          type: "incomingMessage",
+          id: uuid(),
+          username: receivedMessage.username,
+          content: receivedMessage.content
+        }
+        wss.broadcast(JSON.stringify(messageObject));
+        break;
+      case "postNotification":
+        const notiObject = {
+          type: "incomingNotification",
+          id: uuid(),
+          username: receivedMessage.username,
+          content: receivedMessage.content
+        }
+        wss.broadcast(JSON.stringify(notiObject));
+        break;
+    }
+
   });
 
 

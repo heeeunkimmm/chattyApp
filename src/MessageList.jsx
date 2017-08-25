@@ -4,13 +4,23 @@ import Message from './Message.jsx';
 class MessageList extends Component {
   render() {
     console.log("Rendering <MessageList/>");
-    const messages = this.props.messages.map(messages => {
-      return (
-        <Message
-          key={ messages.id }
-          username={ messages.username }
-          content={ messages.content }/>
-      )
+    const messages = this.props.messages.map(message => {
+      if (message.type === "incomingNotification") {
+        return (
+          <div
+            className="message system"
+            key={ message.id }>
+              { message.content }
+          </div>
+        )
+      } else {
+        return (
+          <Message
+            key={ message.id }
+            username={ message.username }
+            content={ message.content }/>
+        )
+      }
     });
 
     return (
