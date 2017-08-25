@@ -9,7 +9,7 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-		  currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
+		  currentUser: "Bob", // optional. if currentUser is not defined, it means the user is Anonymous
 		  messages: []
 		}
 		this.addMessage = this.addMessage.bind(this);
@@ -20,15 +20,6 @@ class App extends Component {
 	componentDidMount() {
 		this.socket = new WebSocket('ws://localhost:3001');
 		console.log("connected to the server");
-
-		// this.socket.addEventListener('user', (event) => {
-		// 	const newUser = this.state.currentUser;
-		// 	const userObject = JSON.parse(event.data);
-		// 	newUser.push(userObject);
-		// 	this.setState({
-		// 		currentUser: newUser
-		// 	})
-		// })
 
 		this.socket.addEventListener('message', (event) => {
 			const newMessages = this.state.messages;
@@ -42,23 +33,30 @@ class App extends Component {
 
 	//incoming message
 	addMessage(content) {
-		console.log(content);
+		console.log('this is the new name:', this.state.currentUser);
 		let addMessage = {
-			id: uuid(),
-			username: this.state.currentUser.name,
-			content: content
+			username: this.state.currentUser,
+			content: content,
+			type: 'message'
 		};
+		console.log(addMessage);
 		this.socket.send(JSON.stringify(addMessage));
 
 	}
 
 	//incoming user
 	addUser(user) {
-		console.log(user);
-		// let addUser = {
-		// 	name: user
-		// };
-		// this.socket.send(JSON.stringify(addUser));
+		// console.log("bob: ", this.state.currentUser.name);
+		// console.log(user);
+		let addUser = {
+			username: user,
+			type: 'change-user',
+			content: this.state.currentUser + " changed their name to " + user
+		};
+		this.setState({
+			currentUser: user
+		})
+		this.socket.send(JSON.stringify(addUser));
 	}
 
 
