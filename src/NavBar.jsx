@@ -7,7 +7,7 @@ class NavBar extends Component {
     return (
       <nav className="navbar">
        <a href="/" className="navbar-brand">Chatty</a>
-       <span className="online-users"> hello </span>
+       <span className="online-users"> _ users online </span>
       </nav>
     );
   }
