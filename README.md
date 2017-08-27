@@ -5,15 +5,17 @@ This is a real time, chat application using React, Babel, WebPack and Websocket.
 
 ## Screenshots
 
-###User 1 sends messages
-!["Screenshot of Tweeter Landing Page"](https://github.com/heeeunkimmm/tweetr/blob/master/docs/Tweeter_landingPage.png)
+### User 1 sends messages
+!["Screenshot of user 1 sending messages"](https://github.com/heeeunkimmm/chattyApp/blob/master/docs/user_1_message.png)
 
-###User 2 changes username
-!["Screenshot of Tweet's Hover State"](https://github.com/heeeunkimmm/tweetr/blob/master/docs/Tweeter_Tweet_hover.png)
+### User 2 changes username
+!["Screenshot of user 2 changing username"](https://github.com/heeeunkimmm/chattyApp/blob/master/docs/user_2_change_username.png)
 
-###User 2 sends messages
+### User 2 sends messages
+!["Screenshot of user 2 sending messages"](https://github.com/heeeunkimmm/chattyApp/blob/master/docs/user_2_leaves.png)
 
-###User 2 leaves chatroom and user count gets updated.
+### User 2 leaves chatroom and user count gets updated.
+!["Screenshot of user 2 leaving chatroom"](https://github.com/heeeunkimmm/chattyApp/blob/master/docs/user_2_message.png)
 
 
 ## Dependencies
