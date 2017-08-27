@@ -19,8 +19,8 @@ class MessageList extends Component {
             key={ message.id }
             username={ message.username }
             content={ message.content }/>
-        )
-      }
+        );
+      };
     });
 
     return (
@@ -28,6 +28,6 @@ class MessageList extends Component {
       { messages }
     </div>
     );
-  }
-}
+  };
+};
 export default MessageList;

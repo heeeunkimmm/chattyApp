@@ -10,7 +10,6 @@ const PORT = 3001;
 
 // Create a new express server
 const server = express()
-   // Make the express server serve static assets (html, javascript, css) from the /public folder
   .use(express.static('public'))
   .listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on ${ PORT }`));
 
@@ -27,14 +26,12 @@ wss.broadcast = function broadcast(data) {
 
 wss.on('connection', (socket) => {
   console.log('Client connected');
-  console.log('online clients: ', wss.clients.size);
 
   const userCountObj = {
     type: "userCountChanged",
     content: wss.clients.size
   }
   wss.broadcast(JSON.stringify(userCountObj));
-
 
   socket.on('message', function incoming(message) {
     console.log('received: ', message);
@@ -62,8 +59,6 @@ wss.on('connection', (socket) => {
 
   });
 
-
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   socket.on('close', () => {
     console.log('Client disconnected');
     console.log('online clients after closing: ', wss.clients.size);
@@ -73,5 +68,4 @@ wss.on('connection', (socket) => {
     }
     wss.broadcast(JSON.stringify(userCountObj));
   });
-
 });

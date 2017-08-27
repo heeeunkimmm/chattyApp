@@ -7,9 +7,9 @@ class NavBar extends Component {
     return (
       <nav className="navbar">
        <a href="/" className="navbar-brand">Chatty</a>
-       <span className="online-users"> { this.props.userCount } users online </span>
+       <span className="online-users"> { this.props.userCount } user(s) online </span>
       </nav>
     );
-  }
-}
+  };
+};
 export default NavBar;

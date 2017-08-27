@@ -11,6 +11,6 @@ class Message extends Component {
         </div>
       </main>
     );
-  }
-}
+  };
+};
 export default Message;

@@ -3,7 +3,6 @@ import ChatBar from './ChatBar.jsx';
 import NavBar from './NavBar.jsx';
 import MessageList from './MessageList.jsx';
 
-
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -12,11 +11,11 @@ class App extends Component {
 			userCount: 0,
 		  currentUser: "Bob",
 		  messages: []
-		}
+		};
+
 		this.addMessage = this.addMessage.bind(this);
 		this.addUser = this.addUser.bind(this);
  	}
-
 
 	componentDidMount() {
 		this.socket = new WebSocket('ws://localhost:3001');
@@ -25,7 +24,6 @@ class App extends Component {
 		this.socket.addEventListener('message', (event) => {
 			const newMessages = this.state.messages;
 			const messageObject = JSON.parse(event.data);
-			console.log("what is this: ", messageObject)
 			switch(messageObject.type) {
 				case "incomingMessage":
 					newMessages.push(messageObject);
@@ -43,9 +41,9 @@ class App extends Component {
 					this.setState({
 						userCount: messageObject.content
 					});
-			}
-		})
-	}
+			};
+		});
+	};
 
 	//incoming message
 	addMessage(content) {
@@ -55,7 +53,7 @@ class App extends Component {
 			type: 'postMessage'
 		};
 		this.socket.send(JSON.stringify(addMessage));
-	}
+	};
 
 	//incoming user
 	addUser(user) {
@@ -66,10 +64,9 @@ class App extends Component {
 		};
 		this.setState({
 			currentUser: user
-		})
+		});
 		this.socket.send(JSON.stringify(addUser));
-	}
-
+	};
 
 	render() {
 		console.log("Rendering <App/>");
@@ -81,7 +78,7 @@ class App extends Component {
 		  	addUser= { this.addUser }
 		  	addMessage= { this.addMessage }/>
 		  </div>
-			)
-	}
-}
+			);
+	};
+};
 export default App;
