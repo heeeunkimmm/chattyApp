@@ -9,7 +9,8 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-		  currentUser: "Bob", // optional. if currentUser is not defined, it means the user is Anonymous
+			userCount: 0,
+		  currentUser: "Bob",
 		  messages: []
 		}
 		this.addMessage = this.addMessage.bind(this);
@@ -38,27 +39,29 @@ class App extends Component {
 						messages: newMessages
 					})
 					break;
+				case "userCountChanged":
+					this.setState({
+						userCount: messageObject.content
+					});
 			}
 		})
 	}
 
 	//incoming message
 	addMessage(content) {
-		console.log('this is the new name:', this.state.currentUser);
+		// console.log('this is the new name:', this.state.currentUser);
 		let addMessage = {
 			username: this.state.currentUser,
 			content: content,
 			type: 'postMessage'
 		};
-		console.log(addMessage);
+		// console.log(addMessage);
 		this.socket.send(JSON.stringify(addMessage));
 
 	}
 
 	//incoming user
 	addUser(user) {
-		// console.log("bob: ", this.state.currentUser.name);
-		// console.log(user);
 		let addUser = {
 			username: user,
 			type: 'postNotification',
@@ -75,10 +78,9 @@ class App extends Component {
 		console.log("Rendering <App/>");
 		return (
 			<div>
-			<NavBar />
+			<NavBar userCount= { this.state.userCount }/>
 		  <MessageList messages={ this.state.messages }/>
 		  <ChatBar
-		  	// currentUser= { this.state.currentUser }
 		  	addUser= { this.addUser }
 		  	addMessage= { this.addMessage }/>
 		  </div>
