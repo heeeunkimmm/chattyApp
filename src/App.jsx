@@ -49,15 +49,12 @@ class App extends Component {
 
 	//incoming message
 	addMessage(content) {
-		// console.log('this is the new name:', this.state.currentUser);
 		let addMessage = {
 			username: this.state.currentUser,
 			content: content,
 			type: 'postMessage'
 		};
-		// console.log(addMessage);
 		this.socket.send(JSON.stringify(addMessage));
-
 	}
 
 	//incoming user
